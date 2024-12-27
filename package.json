@@ -1,5 +1,5 @@
 {
-  "name": "ddos-protection-proxy",
+  "name": "js-anti-ddos",
   "version": "1.0.0",
   "description": "DDoS protection proxy with captcha challenge",
   "main": "src/server.js",
