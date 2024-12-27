@@ -4,11 +4,13 @@ const config = require('../config/config');
 const rateLimiter = require('./middleware/rateLimiter');
 const captchaService = require('./services/captchaService');
 const store = require('./utils/inMemoryStore');
+const path = require('path');
 
 const app = express();
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
-app.use(express.static('public'));
 
 // Captcha endpoints
 app.get('/captcha', (req, res) => {
