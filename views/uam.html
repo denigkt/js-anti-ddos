@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Check</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+            background: linear-gradient(-45deg, #3b82f6, #2563eb, #1d4ed8, #1e40af);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .animate-pulse-fast {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="animate-gradient min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-md w-full bg-white bg-opacity-95 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
+            <!-- Security Shield Animation -->
+            <div class="absolute top-0 left-0 w-full h-2 bg-blue-500 animate-pulse-fast"></div>
+            
+            <!-- Content -->
+            <div class="text-center space-y-6">
+                <!-- Shield Icon -->
+                <div class="mx-auto h-20 w-20 bg-blue-100 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                    </svg>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">DDoS Protection</h2>
+                    <p class="mt-2 text-gray-600">Checking your browser before accessing the site</p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full w-0 transition-all duration-100"></div>
+                </div>
+
+                <!-- Status Message -->
+                <div class="flex items-center justify-center space-x-2">
+                    <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span id="status-text" class="text-sm text-gray-600">Verifying your browser...</span>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="text-xs text-gray-500 mt-4">
+                    <p>This process is automatic. Your browser will redirect to your requested content shortly.</p>
+                    <p class="mt-1">Please allow up to 5 seconds...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let startTime = Date.now();
+        const duration = 5000; // 5 seconds
+        
+        function updateProgress() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min((elapsed / duration) * 100, 100);
+            
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            
+            if (progress < 100) {
+                requestAnimationFrame(updateProgress);
+            } else {
+                document.getElementById('status-text').textContent = 'Verification complete!';
+                // Add success class to progress bar
+                document.getElementById('progress-bar').classList.add('bg-green-500');
+                // Redirect to original page
+                setTimeout(() => window.location.reload(), 500);
+            }
+        }
+
+        // Start the progress animation
+        updateProgress();
+    </script>
+</body>
+</html> 
